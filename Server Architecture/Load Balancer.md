@@ -53,6 +53,6 @@
 서버의 현재 연결 상태와 응답시간을 모두 고려하여 트래픽을 배분.
 <br> 가장 적은 연결 상태와 가장 짧은 응답시간을 보이는 서버에 우선적으로 로드를 배분
 
+[L4, L7 로드밸런서](https://github.com/YoonSeok-Heo/TIL/blob/main/Server%20Architecture/L4%20L7.md)
 
-
-L4, L7 로드벨런서는 나중에 
+[참고자료](https://m.post.naver.com/viewer/postView.naver?volumeNo=27046347&memberNo=2521903)
