@@ -247,7 +247,7 @@ create table instructor (
 
 
 
-### 2.3. 관계대수
+### 2.3. 관계대수 - 1
 
 ### 2.3.1. 관계데이터 연산
 
@@ -278,22 +278,42 @@ create table instructor (
 - theta join
 - outer join
 
-### 2.3.2. select
+### 2.3.2. select operaion
 
-- Notation : 𝞂𝞂p(r)
-- 𝞂𝞂p(r) = { t | t ∈ r ∧ p(t)}
-- Unary operation
-- p : selection predicate
-  - 비교 연산자 (>, ≧, <, ≦, = , ≠), 논리 연산자(¬not, ∧and ,∨or ) 이용하여 속성의 값을 비교하는 비교
-  
-r
-A|B|C|D
---|--|--|--
-a|b|1|7
+![image](https://user-images.githubusercontent.com/113662725/210572202-149a4de8-f45e-4601-8a99-f73c29e2be9c.png)
 
+### 2.3.3. project operaion
 
+![image](https://user-images.githubusercontent.com/113662725/210572258-fbdce1d8-7dcf-460d-b90c-0e2c9d59e172.png)
 
+### 2.3.4. union operation(합집합)
 
+![image](https://user-images.githubusercontent.com/113662725/210572317-ef8cd9a3-3b3a-4bdf-b4b3-9b240067d194.png)
 
+### 2.3.5. difference operation(차집합)
+
+![image](https://user-images.githubusercontent.com/113662725/210572424-04fcff65-a8cc-45b4-a96c-6608324f7010.png)
+
+### 2.3.6 intersection operation(교집합)
+
+![image](https://user-images.githubusercontent.com/113662725/210572565-dbfd24e0-ba0e-48bb-bbcd-c8875864aea1.png)
+
+## 2.4. 관계 대수 - 2
+
+### 2.4.1 Cartesioan product operation
+
+![image](https://user-images.githubusercontent.com/113662725/210573645-665a4082-a029-4ea8-b2e9-ecacbfd95f84.png)
+
+### 2.4.2 Natural join operation
+
+![image](https://user-images.githubusercontent.com/113662725/210576419-2a7c696e-038f-46a8-98df-83e67720d950.png)
+
+### 2.4.3 Theta join operation
+
+![image](https://user-images.githubusercontent.com/113662725/210576822-600e4a40-dc5e-458b-a4d3-9767ae0a78b4.png)
+
+### 2.4.4 Outer join operation
+
+![image](https://user-images.githubusercontent.com/113662725/210577305-e8a0cb14-d28d-4891-a395-eac4c93e7f0e.png)
 
 
