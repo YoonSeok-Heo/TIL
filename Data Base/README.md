@@ -245,3 +245,55 @@ create table instructor (
 #### 2.2.4.3. 참조 무결성 제약조건 (referential integrity constraint, =foreign key constraint)
 - Foreign key는 참조하는 릴레이션의 primary key 속성 값 중 하나여야 한다 (null 가능)
 
+
+
+### 2.3. 관계대수
+
+### 2.3.1. 관계데이터 연산
+
+모든 DBMS는 데이터 처리를 위해 하나 이상의 데이터 언어를 제공
+
+#### 2.3.1.1. Formal query language
+- 수학기호(notation)을 사용하여 데이터 처리를 기술한 언어
+- 새로운 언어의 개념과 유용성을 검증하는 기준
+- 관계 대수(Relation algebra)
+
+#### 2.3.1.2. Commercial language
+- 수학적인 원리를 기반으로 사용하기 쉽게 만들어진 단어
+- 관계 대수로 만들어진 모든 질의가 표현 가능 - Relationally complete
+- SQL
+
+#### 2.3.1.3. 관계 대수 연산자 (Relational Algebra Operations)
+- 피연산자로 하나 또는 두 개의 릴레이션(Unary and binary operaions)
+- 각 연산자의 연산 결과는 새로운 릴레이션-연산의 합성(compose)&체이닝(chaining)가능
+
+#### 2.3.1.4. 연산자 종류
+- select
+- project
+- union
+- difference
+- intersection
+- cartesian product
+- natural join
+- theta join
+- outer join
+
+### 2.3.2. select
+
+- Notation : 𝞂𝞂p(r)
+- 𝞂𝞂p(r) = { t | t ∈ r ∧ p(t)}
+- Unary operation
+- p : selection predicate
+  - 비교 연산자 (>, ≧, <, ≦, = , ≠), 논리 연산자(¬not, ∧and ,∨or ) 이용하여 속성의 값을 비교하는 비교
+  
+r
+A|B|C|D
+--|--|--|--
+a|b|1|7
+
+
+
+
+
+
+
