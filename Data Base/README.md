@@ -316,4 +316,38 @@ create table instructor (
 
 ![image](https://user-images.githubusercontent.com/113662725/210577305-e8a0cb14-d28d-4891-a395-eac4c93e7f0e.png)
 
+---
+
+# 3. SQL 데이터베이스 언어
+
+## 3.1. SQL 소개
+
+### 3.1.1. SEQUEL(Structured English QUEry Language)
+- 1974년 IBM San Jose Research Lab에서 연구용 DBMS 인 SYSTEM R 를 위한 언어로 개발된 언어 연산자로 하나 또는 두 개의 릴레이션 (Unary and binary operations)
+**SQL (Structured Query Language) : SEQUEL에서 이름이 바뀜**
+
+### 3.1.2. SQL?
+- 대부분의 DBMS 는 SQL-92 표준의 대부분을 지원하고 추후의 표준에 지정된 기능을 추가하여 지원하고 고유의 기능도 제공함
+- 최근 SQL-2011 에 추가된 기능 예제
+  - Temporal table (system versioned temporal table)
+  - 데이터 변경 내용의 전체 기록을 유지해 간편한 지정 시간 분석을 허용하도록 설계된 사용자 테이블의 종류
+### 3.1.3. SQL 분류
+
+#### 3.1.3.1. DDL (Data Definition Language)
+- 테이블을 생성하고 변경, 제거하는 기능을 제공
+
+#### 3.1.3.2. DML (Data Manipulation Language)
+- 테이블에 새 데이터를 삽입하거나, 테이블에 저장된 데이터를 수정, 삭제하는 기능을 제공
+
+#### 3.1.3.3. SELECT
+- 테이블 데이터를 조회하는 기능을 제공
+
+#### 3.1.3.4. DCL (Data Control Language)
+- 보안을 위해 데이터에 대한 접근 및 사용권한을 조절하는 기능을 제
+
+
+![image](https://user-images.githubusercontent.com/113662725/210800621-954a7ad5-8e60-462c-ab43-47cca716f85e.png)
+
+
+## 3.2. DDL : 데이터 정의
 
