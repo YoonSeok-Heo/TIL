@@ -351,3 +351,85 @@ create table instructor (
 
 ## 3.2. DDL : 데이터 정의
 
+- 데이터베이스 구조를 정의하고 변경하는 기능을 제공하는 언어
+- Create: 새로운 데이터베이스 오브젝트들을 생성(schema, table, view 등)
+- Alter: 존재하는 오브젝트의 정의를 변경
+- Drop: 존재하는 오브젝트를 데이터베이스에서 삭제
+
+### 3.2.1. Create Table syntax
+```
+CREATE TABLE <table name> { <column definitions> | <like_table_clause> } 
+  <column definitions> := (<data column definition>, ...)
+  <data column definition> := <column name> <data type> [<default value>] [ <integrity constraint>]
+  <default value> := DEFAULT <value>
+  <integrity constraint> := { UNIQUE | <primary key> | <reference contraint> | <check constraint>}
+```
+
+### 3.2.2. Example
+```sql
+CREATE TABLE student (
+  ID varchar(8) primary key,
+  name varchar(20) not null,
+  dept_name varchar(20),
+  grade smallint,
+  foreign key (dep_name) reference department
+);
+```
+
+### 3.2.3. 데이터타입 on Sql
+
+|데이터 타입|설명|
+|---|---|
+|CHAR(n)|길이가 n으로 고정인 문자열|
+|VARCHAR(n)|최대 길이가 n인 가변 길이의 문자열|
+|BIGINT|8Bytes 정수|
+|INT or INTEGER|4Bytes 정수|
+|SAMLLINT|2Bytes 정수|
+|NUMERIC(p, s) or DECIMAL (p, s)|고정 소수점 실수 <br>p: 소수점을 제외한 전체 길이, s : 소수점 이하 숫자의 길이|
+|FLOAT(n)|길이가 n인 부동소수점 실수|
+|REAL|부동 소수점 실수|
+|DATE|연, 월, 일로 표현되는 시간|
+|TIME|시, 분, 초로 표현되는 시간|
+|TIMESTAMP|DATE + TIME|
+|BLOB|Binary large objects|
+|CLOB|Charater large objects|
+
+#### 3.2.3.1 Decimal example
+![image](https://user-images.githubusercontent.com/113662725/212526697-6dc7fc21-9a8f-46b7-8abe-5d16067d9536.png)
+
+
+#### 3.2.3.2. default clause
+**SQL분류\<default value\> := DEFAULT \<value\>**
+- INSERT문에 컬럼에 대한 값이 지정되지 않았을 때 null대신에 <value> 사용
+- credit INT DEFAULT 0
+- contact char(20) DEFAULT 'james'
+
+#### 3.2.3.3. contraint clause
+**\<integrity constraint\> := {UNIQUE | \<primary key\> | \<reference contraint\> | \<check constraint\>}**
+- UNIQUE : 대체 키를 지정하고 유일성을 가지는 컬럼임을 지정
+- PRIMARY KEY : ROW를 식별할 수 있는 기본 키 ( unique + not null )
+- <reference constraint> : 참조하는 테이블을 지정하는 외래키 설정 (다음 장에서 설명) 
+- <check constraint> : column 값의 가능 domain 지정 (다음 장에서 설명
+
+#### 3.2.3.4. CREATE TABLE LIKE
+**CREATE TABLE \<table name\> \<like_table_clause\> \<like_table_clause\> <br>:= LIKE \<table_name\> \[WITH DATA\]**
+<br>Ex) CREATE TABLE customer_backup LIKE customer WITH DATA;
+
+#### 3.2.3.5 ALTER TABLE
+-새로운 컬럼 추가
+  - ALTER TBLE <table_name> ADD <column_name> <column_type> [not null] [<default_value>
+  - Ex) ALTER TABLE customer ADD reg_date DATE;
+- 기존 컬럼 삭제
+  - ATLER TABLE <table_name> DROP COLUMN <column_name>
+  - Ex) ALTER TABLE customer drop age;
+- 새로운 제약조건 추가
+  - ALTER TABLE <table_name> ADD CONSTRAINT <constraint_name> <contraints>
+  - ATLER TBLE customer ADD CONSTRAINT set_pri_key PRIMARY KEY (id)
+- 제약조건 삭제
+  - ALTER TBLE <tble_name> DROP CONTRAINT set_pri_key
+
+#### 3.2.3.6 DROP TABLE
+- 테이블 데이터 및 catalog 삭제
+- DROP TABLE <table_name>
+
+
