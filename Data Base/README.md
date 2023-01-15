@@ -432,4 +432,96 @@ CREATE TABLE student (
 - 테이블 데이터 및 catalog 삭제
 - DROP TABLE <table_name>
 
+## 3.3. SELECT: 데이터 조회
+- 테이블에서 원하는 데이터를 검색하는 SQL
+
+### 3.3.1. SELECT
+- SELECT clause 는 산술식 (arithmetic expression) 을 포함 가능
+  - +, -, * and /
+  - SELECT ID, name, salary/12 from employee
+
+#### 3.3.1.1. Syntax
+- SELECT \[DISTINCT\] \{* | \<column_name\>, ...\} FROM \<table list\>;
+
+#### 3.3.1.2. Example
+- SELECT DISTINCT dept_name from instructor;
+  - DISTINCT : 결과 테이블에서 중복된 레코드를 제거하는 키워드
+
+### 3.3.2. SELECT with WHERE
+- 테이블에서 조건에 맞는 데이터만 검색하기 위해 WHERE clause 이용
+
+#### 3.3.2.1. Syntax
+- SELECT \[DISTINCT\] \{* | \<column_name\>, ...\} FROM \<table list\> \[ WHERE condition \];
+- Condition은 비교 연산자 (=, <>, <, >, <= , =>) 와 논리연산자 (AND, OR, NOT)
+
+#### 3.3.2.2. Example
+```sql
+SELECT name from employee WHERE dept_name = ‘SALES’ and salary > 100000;
+```
+
+#### 3.3.2.3. LIKE keyword
+- 문자열 컬럼인 경우 부분적인 매칭으로 조건 검색 가능
+- % : 0개 이상의 문자 , _ : 1개의 문자
+```sql
+SELECT * from employee where name like ‘이%’;
+```
+```sql
+SELECT * from employee where name like ‘이정_’
+```
+
+### 3.3.3. NULL Value
+- null은 empty가 아닌 unknown
+- null값과 산술 연한 및 비교 연산 결과는 null
+  - 5 + null returns null
+  - null > 5 returns null
+  - null = null returns null
+  
+
+- null과 논리 연산 결과
+  - OR : (null OR true) = true, (null or false) = null, (null or null) = null
+  - AND : (true AND null) = null, (false AND null) = false, (null and null) = null
+  - NOT : (NOT null) = null
+  
+
+- null 값을 가진 row을 찾기 위한 조건식 – IS NULL
+```sql
+SELECT id, name FROM customer WHERE aga IS NULL;
+```
+  
+### 3.3.4. ORDER BY
+- SELECT의 검색 결과를 정렬하기 위해 ORDER BY 키워드 사용
+
+#### 3.3.4.1. Syntax
+```sql
+SELECT [DISTINCT] {* | <column_name>, ...} 
+FROM <table list> [ WHERE condition ]
+[ ORDER BY <column_name>, ... [ASC | DESC] ];
+```
+- ASC: 오름 차순 정렬 (default), DESC: 내림 차순 정렬
+
+#### 3.3.4.2. Example
+```sql
+SELECT id, name, age, address FROM customer ORDER BY age DESC;
+```
+```sql
+SELECT id, name, dept_name, salary FROM employee ORDER BY salary;
+```
+```sql
+SELECT id, product, quantity, order_date FROM sales_orders
+ORDER BY order_date ASC, quantity DESC;
+```
+
+### 3.3.5. Aggregation Function
+
+
+
+
+
+
+
+
+
+
+
+
 
