@@ -513,6 +513,82 @@ ORDER BY order_date ASC, quantity DESC;
 
 ### 3.3.5. Aggregation Function
 
+#### 3.3.5.1. 특정 컬럼의 값을 통계적으로 계산한 결과를 보여주는 SQL 함
+- count: 컬럼 값의 개수
+- max: 컬럼 값의 최대값
+- min: 컬럼 값의 최소값
+- sum: 컬럼 값의 합계
+- avg: 컬럼 값의 평균
+
+#### 3.3.5.2. COUNT, MAX, MIN은 LOB 타입을 제외한 모든 타입에서 사용 가능 SUM, AVG는 숫자 데이터만 가능
+```sql
+SELECT sum (salary) FROM employee WHERE dept_name = ‘SALES’;
+```
+```sql
+SELECT count (distinct id) FROM sales_orders WHERE product = ‘computer’;
+```
+
+### 3.3.6. Null value in aggregation function
+
+#### 3.3.6.1. SELECT sum (salary) FROM employee;
+- 만약 컬럼 값이 null이면 합을 계산할 때 무시
+- 만약 컬럼 값이 모두 null이면 null이 출력된다.
+
+#### 3.3.6.2. MAX, MIN, SUM, AVG 경우 null이 아닌 값으로만 계산
+- 모든 null인 경우 null을 리턴
+
+#### 3.3.6.3. COUNT : null이 아닌 값의 개수를 출력
+- 컬럼이 모두 null인 경우 0리턴
+
+#### 3.3.6.4. 테이블에 레코드가 없는 경우
+- sum, avg, min, max: return null
+- count: return 0
+
+### 3.3.7. GROUP BY
+
+#### 3.3.7.1 GROUP BY
+- 테이블에서 특정 컬럼의 값이 같은 rows를 모아 그룹을 만들고, 그룹별로 검색하기 위해 사용되는 keyword
+- 그룹에 대한 조건을 추가하려면 HAVING 키워드를 이용
+  - Where 조건 : 레코드를 grouping 하기 전에 조건을 검색
+  - Having 조건 : 레코드들을 grouping 후에 그룹에 대한 조건을 검색
+  
+#### 3.3.7.2. Syntax
+```sql
+SELECT [DISTINCT] {* | <column_name>, ...} 
+FROM <table list> [ WHERE condition ]
+  [ GROUP BY <column_name list> [ HAVING condition ] ]
+  [ ORDER BY <column_name_list> [ASC | DESC] ]
+```
+#### 3.3.7.3. Aggregation function을 제외한 SELECT문의 컬럼은 GROUP BY 리스트에 포함된 컬럼들만 가능
+```sql
+SELECT dept_name, ID, avg (salary) from employee group by dept_name;
+```
+- Return error : SELECT list is not in GROUP BY clause and contains nonaggregated column
+
+--- 
+#### Example
+```sql
+SELECT dept_name, avg (salary) FROM employee GROUP BY dept_name;
+```
+```sql
+SELECT dept_name, avg (salary) FROM employee GROUP BY dept_name
+HAVING avg(salary) > 50000000;
+```
+```sql
+SELECT company_name, 
+      count(product_name) as number_of_product, 
+      max(price) as highest_price
+FROM product GROUP BY company_name;
+```
+```sql
+SELECT company_name, 
+      count(product_name) as number_of_product, 
+      max(price) as highest_price
+FROM product GROUP BY company_name
+HAVING COUNT(product_name) >= 3;
+```
+
+
 
 
 
