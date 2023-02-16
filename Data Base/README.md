@@ -566,7 +566,7 @@ SELECT dept_name, ID, avg (salary) from employee group by dept_name;
 - Return error : SELECT list is not in GROUP BY clause and contains nonaggregated column
 
 --- 
-#### Example
+#### 3.3.7.4. Example
 ```sql
 SELECT dept_name, avg (salary) FROM employee GROUP BY dept_name;
 ```
@@ -588,10 +588,113 @@ FROM product GROUP BY company_name
 HAVING COUNT(product_name) >= 3;
 ```
 
+### 3.3.8. Set
+
+#### 3.3.8.1. Union : r∪s
+```sql
+select a, b from r
+union
+select a, b, from s;
+```
+
+**r**
+|A|B|
+|---|---|
+|a|1|
+|a|2|
+|b|1|
+
+**s**
+|A|B|
+|---|---|
+|a|2|
+|b|3|
+
+**r∪s**
+|A|B|
+|---|---|
+|a|1|
+|a|2|
+|b|1|
+|b|3|
+
+### 3.3.8.2. Difference (except) : r - s
+```sql
+select a, b from r
+except
+select a, b, from s;
+```
+
+**r**
+|A|B|
+|---|---|
+|a|1|
+|a|2|
+|b|1|
+
+**s**
+|A|B|
+|---|---|
+|a|2|
+|b|3|
+
+**r-s**
+|A|B|
+|---|---|
+|a|1|
+|b|1|
+
+#### 3.3.8.3. intersection : r ∩ s
+```sql
+select a, b from r
+intersect
+select a, b, from s;
+```
+**r**
+|A|B|
+|---|---|
+|a|1|
+|a|2|
+|b|1|
+
+**s**
+|A|B|
+|---|---|
+|a|2|
+|b|3|
+
+**r-s**
+|A|B|
+|---|---|
+|a|2|
+
+#### 3.3.8.4. Cartesian Product : r × s
+```sql
+SELECT * FROM r, s
+```
+**r**
+|A|B|
+|---|---|
+|a|1|
+|b|5|
+
+**s**
+|C|D|E|
+|---|---|---|
+|c|100|5|
+|d|200|6|
+|e|300|7|
 
 
-
-
+**r X s**
+|A|B|C|D|E|
+|---|---|---|---|---|
+|a|1|c|100|5|
+|a|1|d|200|6|
+|a|1|e|300|7|
+|b|5|c|100|5|
+|b|5|c|200|6|
+|a|5|c|300|7|
 
 
 
