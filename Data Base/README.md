@@ -668,7 +668,10 @@ select a, b, from s;
 |---|---|
 |a|2|
 
-#### 3.3.8.4. Cartesian Product : r × s
+
+### 3.3.9. JOINs
+
+#### 3.3.9.1. Cartesian Product : r × s
 ```sql
 SELECT * FROM r, s
 ```
@@ -696,7 +699,78 @@ SELECT * FROM r, s
 |b|5|c|200|6|
 |a|5|c|300|7|
 
+#### 3.3.9.2. Natural join : r ⋈ s
+```sql
+SELECT * from r natural join s;
+```
+- 많은 DBMS가 지원을 안함
 
+**r**
+|A|B|C|D|
+|---|---|---|---|
+|a|1|a|a|
+|b|2|y|a|
+|y|4|b|b|
+|a|1|y|a|
+|b|2|b|b|
+|b|5|
+
+**s**
+|B|D|E|
+|---|---|---|
+|1|a|a|
+|3|a|b|
+|1|a|y|
+|2|b|b|
+|3|b|e|
+
+
+**r ⋈ s**
+|r.A|r.B|r.C|r.D|s.E|
+|---|---|---|---|--|
+|a|1|a|a|a|
+|a|1|a|a|y|
+|a|1|y|a|a|
+|a|1|y|a|y|
+|b|2|b|b|b|
+
+
+#### 3.3.9.3. Theta join : r ⋈θ s
+```sql
+select r.a, r.b, r.c, r.d, s.e
+from r join s on r.b = s.b and r.d = s.d;
+```
+- 많은 DBMS에서 사용되는 inner join 실행문
+
+
+**r**
+|A|B|C|D|
+|---|---|---|---|
+|a|1|a|a|
+|b|2|y|a|
+|y|4|b|b|
+|a|1|y|a|
+|b|2|b|b|
+|b|5|
+
+**s**
+|B|D|E|
+|---|---|---|
+|1|a|a|
+|3|a|b|
+|1|a|y|
+|2|b|b|
+|3|b|e|
+
+
+**r ⋈(r.a=a ∧ r.b=s.b) s**
+|r.A|r.B|r.C|r.D|s.E|
+|---|---|---|---|--|
+|a|1|a|a|a|
+|a|1|a|a|y|
+|a|1|y|a|a|
+|a|1|y|a|y|
+|b|2|b|b|b|
 
 
 
