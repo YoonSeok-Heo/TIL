@@ -3,7 +3,7 @@
 
 보통 쓰레드 객체를 만들 때 Thread 클래스를 상속하여 만들기도 하지만 Runnable 인터페이스를 구현하는 방법을 주로 쓴다. 왜냐하면 Thread클래스를 상속하면 다른 클래슬르 상속할 수 없기 때문이다.
 
-[Thread에 대하여 알고싶다면 클릭!! 이 문서를 읽기전에 읽는걸 추천](https://github.com/YoonSeok-Heo/TIL/blob/main/JAVA/Thread/Thread)
+[Thread에 대하여 알고싶다면 클릭!! 이 문서를 읽기전에 읽는걸 추천](https://github.com/YoonSeok-Heo/TIL/blob/main/JAVA/Thread/Thread.md)
 
 위 링크에 Thread를 이용한 코드이다.
 ```java
