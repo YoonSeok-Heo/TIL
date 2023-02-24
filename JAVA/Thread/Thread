@@ -1,5 +1,5 @@
-# Thread와 Runnable
-#JAVA #멀티쓰레드 #Thread #Runnable
+# Thread
+#JAVA #멀티쓰레드 #Thread
 
 자바 초기부터 동시성 프로그래밍을 위해 만들어졌던 Thread와 Runnable를 살펴보도록 하자.
 
