@@ -1,4 +1,4 @@
-# Another example: query + post form
+# Map as querystring or postform parameters
 
 query, form-data에 맵형식으로 데이터를 넣을 수 있다. 
 
