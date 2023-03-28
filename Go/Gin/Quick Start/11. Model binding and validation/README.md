@@ -112,6 +112,6 @@ func main() {
 
 ```
 
-## JSON request and response
+## request and response
 
 ![image](https://user-images.githubusercontent.com/113662725/227789836-e2cd9165-6ae4-44cb-8931-ff06282af0ae.png)
