@@ -119,9 +119,53 @@ _ = *(*string)(unsafe.Pointer(&sh))
 > BenchmarkBytesToStringUserNewBuffer-6           100000000              306.2 ns/op
 > BenchmarkBytesToStringUseReflect-6              100000000                0.2782 ns/op
 > ```
+
+> ### 반복수에 따른결과가 이상해서 다시한번 테스트 해보겠다.
 > 
+> 위에서 테스트한 방법은 **golang에서 test**를 사용해 해보았고 이번엔 직접 for문을 돌려서 테스트 해보겠다.
+> 
+> ### 100회
+> ```console
+> 1200bytes
+> string: 0s   
+> Sprintf: 0s  
+> NewBuffer: 0s
+> reflect: 0s  
+> ```
+> 
+> ### 10,000회
+> ```console
+> 1200bytes
+> string: 5.1087ms
+> Sprintf: 4.3256ms
+> NewBuffer: 3.8797ms
+> reflect: 0s
+> 
+> ```
+> 
+> ### 1,000,000회
+> ```console
+> 1200bytes
+> string: 252.8599ms
+> Sprintf: 345.7148ms
+> NewBuffer: 226.1223ms
+> reflect: 514.2µs
+> ```
+> 
+> ### 100,000,000회
+> ```console
+> 1200bytes
+> string: 24.7054633s
+> Sprintf: 35.0372343s
+> NewBuffer: 25.297152s
+> reflect: 52.8281ms
+> ```
+> 
+> 다른 결과가 나왔다. 이 결과가 좀더 정상적인것같다. 이걸 참고하자.
+
+
 > ### 결과
 > 
-> 위의 결과와 약간 다르다. 반복수의 영향을 받는건 reflect인것 같다. 월등히 빠르지만.
+> **reflect >>>>>>> Newbuffer > string >> Springf**
 > 
-> 나머지 함수들은 데이터의 길이에 영향을 받는듯 하다.
+> reflect가 월등히 빠르다.
