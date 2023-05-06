@@ -124,6 +124,8 @@ _ = *(*string)(unsafe.Pointer(&sh))
 > 
 > 위에서 테스트한 방법은 **golang에서 test**를 사용해 해보았고 이번엔 직접 for문을 돌려서 테스트 해보겠다.
 > 
+> [Test에 사용한 파일](https://github.com/YoonSeok-Heo/TIL/blob/main/Go/Sample/%5B%5DbyteToString.go)
+> 
 > ### 100회
 > ```console
 > 1200bytes
