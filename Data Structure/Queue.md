@@ -4,14 +4,76 @@
 
 ## 큐(Queue)의 동작
 
+- Front: 가장 앞에 있는 원소
+- Rear: 가장 뒤에 있는 원소
+
 - enQueue(): 큐에 데이터를 넣는다
+  - Rear값을 +1 해주고 Rear가 가르키는 자리에 데이터를 넣는다.
 - deQueue(): 큐에서 데이터를 뺀다.
+  - Front가 가르키는 자리의 값을 빼고 Front의 값을 +1 해준다.
 - isEmpty(): 큐가 비어있는지 확인한다.
 - isFull(): 큐가 꽉 차 있는지 확인한다.
 - peek(): 앞에있는 원소를 삭제하지 않고 반환한다.
 
-- Front: 가장 앞에 있는 원소
-- Rear: 가장 뒤에 있는 원소
+## 구현
+
+### Golang
+
+slice로 구현되어 있어서 Front, Rear개념이 딱히 필요없어서 간단하게만 만들었다.
+
+```go
+package main
+
+import "fmt"
+
+type Queue struct {
+	items []int
+}
+
+func (q *Queue) enQueue(val int) {
+	q.items = append(q.items, val)
+}
+
+func (q *Queue) deQueue() int {
+	retVal := q.items[0]
+	q.items = q.items[1:]
+	return retVal
+}
+
+func (q *Queue) isEmpyty() bool {
+	return len(q.items) == 0
+}
+
+// 큐의 배열을 slice로 구현했기 때문에 isFull은 구현하지 않았다.
+//func (q *Queue) isFull() bool{
+//	return true
+//}
+
+func (q *Queue) peek() int {
+	return q.items[0]
+}
+
+func main() {
+
+	fmt.Println("Queue")
+	queue := Queue{make([]int, 0)}
+	fmt.Println("enQueue: 1")
+	(&queue).enQueue(1)
+	fmt.Println("enQueue: 2")
+	(&queue).enQueue(2)
+	fmt.Println("enQueue: 3")
+	(&queue).enQueue(3)
+	fmt.Println("queue의 원소들:", (&queue).items)
+	fmt.Println("peek:", (&queue).peek())
+	fmt.Println("deQueue:", (&queue).deQueue())
+	fmt.Println("peek:", (&queue).peek())
+	fmt.Println("deQueue:", (&queue).deQueue())
+	fmt.Println("deQueue:", (&queue).deQueue())
+	fmt.Println("IsEmpty:", (&queue).isEmpyty())
+
+}
+```
+
 
 ## 선형 큐의 단점
 
