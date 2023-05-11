@@ -74,6 +74,146 @@ func main() {
 }
 ```
 
+---
+
+Front, Rear 사용해서 구현. 테스트하려고 enqueue, dequeue만 구현했다.
+
+```go
+type PointQueue struct {
+	items []int
+	front int
+	rear  int
+}
+
+func (q *PointQueue) enQueue(val int) {
+	q.items[q.front] = val
+	q.front++
+}
+
+func (q *PointQueue) deQueue() int {
+	retVal := q.items[q.rear]
+	q.rear++
+	return retVal
+}
+```
+
+## 속도 테스트를 해봐야지
+
+> ### Slice, Front/Rear
+> 
+> 그냥 slice를 사용한 큐와 front, rear를 사용한 큐랑 비교해봐야겠다.
+> 
+> 슬라이스의 용량(Capacity)은 둘다 같은 상태로 시작한다.(데이터가 늘어남에 따라 슬라이스 복사가 발생하면 속도가 확 늘어나기 때문에)
+> 
+> ```go
+> package main
+> 
+> import (
+> 	"fmt"
+> 	"time"
+> )
+> 
+> type SliceQueue struct {
+> 	items []int
+> }
+> 
+> func (q *SliceQueue) enQueue(val int) {
+> 	q.items = append(q.items, val)
+> }
+> 
+> func (q *SliceQueue) deQueue() int {
+> 	retVal := q.items[0]
+> 	q.items = q.items[1:]
+> 	return retVal
+> }
+> 
+> type PointQueue struct {
+> 	items []int
+> 	front int
+> 	rear  int
+> }
+> 
+> func (q *PointQueue) enQueue(val int) {
+> 	q.items[q.front] = val
+> 	q.front++
+> }
+> 
+> func (q *PointQueue) deQueue() int {
+> 	retVal := q.items[q.rear]
+> 	q.rear++
+> 	return retVal
+> }
+> 
+> func main() {
+> 	
+> 	startTime := time.Now()
+> 	queue := SliceQueue{make([]int, 0, 500000000)}
+> 	for i := 0; i < 500000000; i++ {
+> 		(&queue).enQueue(i)
+> 	}
+> 	
+> 	for i := 0; i < 500000000; i++ {
+> 		(&queue).deQueue()
+> 	}
+> 	fmt.Println("Slice 실행시간:", time.Since(startTime))
+>     fmt.Println("슬라이스 길이:", len((&queue).items), "/ 슬라이스 용량:", cap((&queue).items))
+> 
+> 	startTime = time.Now()
+> 	// 사용할 큐의 크기만큼 미리 할당을 해줘야한다.
+> 	pointerQueue := PointQueue{make([]int, 500000000, 500000000), 0, 0}
+> 	for i := 0; i < 500000000; i++ {
+> 		(&pointerQueue).enQueue(i)
+> 	}
+> 	for i := 0; i < 500000000; i++ {
+> 		(&pointerQueue).deQueue()
+> 	}
+> 	fmt.Println("Front/Rear 실행시간:", time.Since(startTime))
+>     fmt.Println("슬라이스 길이:", len((&pointerQueue).items), "/ 슬라이스 용량:", cap((&pointerQueue).items))
+> 
+> 
+> }
+> ```
+> 
+> 
+>> #### 결과
+>> ```console
+>> Slice 실행시간: 2.3534738s
+>> 슬라이스 길이: 0 / 슬라이스 용량: 0
+>> Front/Rear 실행시간: 2.2083191s
+>> 슬라이스 길이: 500000000 / 슬라이스 용량: 500000000
+>> ```
+>> **여러번 반복한 결과 후자가 약간 빠르다.(약 5퍼센트)**
+> 
+>> ### 상황별 장단점.
+>> 
+>> 전자의 경우 모든 데이터들이 deQueue가 된다면 슬라이스 용량이 0으로 줄어든다. 그말은 즉 다시 데이터를 넣을때 용량을 초과하는 데이터가 들어가면 슬라이스 복사가 이루어지면서 속도가 느려지게된다.
+>> 
+>> 후자의 경우 큐를 생성할때 길이만큼만 enQueue가 가능하다. 1회성이라면 좋은 선택일것이다. 이점을 보완하기 위해 **환형 큐**를 사용한다.
+
+
+> ### 용량에 따른 속도 차이
+> #### 용량 설정 O
+> ```go
+> queue := SliceQueue{make([]int, 0, 500000000)}
+> for i := 0; i < 500000000; i++ {
+> 	(&queue).enQueue(i)
+> }
+> ```
+> #### 용량 설정 X
+> ```go
+> queue := SliceQueue{make([]int, 0)}
+> for i := 0; i < 500000000; i++ {
+> 	(&queue).enQueue(i)
+> }
+> ```
+>
+> 
+> ```console
+> 용량 설정 O 실행시간: 2.3951141s
+> 용량 설정 X 실행시간: 7.4095498s
+> ```
+> 
+> 용량을 초과해서 슬라이스 복사가 이루어질때 많은 시간이 들어간다. 이런상황이 없도록 코딩해야한다.
 
 ## 선형 큐의 단점
 
