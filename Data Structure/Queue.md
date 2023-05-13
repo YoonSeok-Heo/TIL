@@ -222,3 +222,5 @@ func (q *PointQueue) deQueue() int {
 - 단순 배열로 구현한다면 공간 효율성이 좋지 못하다.
   - enQueue, deQueue 과정에서 front가 계속 뒤로 밀리게 되고 앞쪽의 공간이 남게된다.
   - 데이터를 앞쪽으로 당겨오게 된다면 모든 원소를 옮겨줘야하므로 속도 측면에서 상당히 느리다.
+
+단점을 해결하기 위해 [원형 큐](https://github.com/YoonSeok-Heo/TIL/blob/main/Data%20Structure/Circular%20Queue.md)를 알아보쟈
