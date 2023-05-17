@@ -5,6 +5,16 @@ chatGPT api를 이용해서 데이터를 받아오는 작업을 진행하는데 
 
 이 포스트는 [<공식문서>](https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/)를 바탕으로 작성했다.
 
+## Open Feign의 장점
+- 인터페이스와 어노테이션 기반이기 때문에 작성할 코드가 줄어든다
+- Spring Mvc어노테이션으로 개발이 가능
+- 다른 Spring Cloud 기술들과 통합이 쉽다.
+
+## Open Feign의 단점
+- 기본적인 Open Feign이 Http2를 지원하지 않는다. -> 추가 설정 필요
+- 공식적으로는 Reactive모델을 지원하지 않는다.
+- 테스트 도구를 제공하지 않음.
+
 ---
 
 # 1. Declarative REST Client: Feign
@@ -32,11 +42,15 @@ implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-o
 
 ## 1.2. 기본 세팅
 
-프로젝트에서 Feign을 사용하려면 스프링 부트에 @EnbleFeignClients를 추가해 주어야 한다. (config파일을 설정하면 안넣어도 된다고 하는데 확인을 다시 해봐야 겠다.)
+프로젝트에서 Feign을 사용하려면 스프링 부트에 @EnableFeignClients를 추가해 주어야 한다. (config파일을 설정하면 안넣어도 된다고 하는데 확인을 다시 해봐야 겠다.)
 
 해당 어노테이션은 하위 클래스를 탐색하면서 @FeignClient를 찾아 구현체를 생성한다고 한다.
 
-> 어쩐지 @EnbleFeignClients가 없을 때 인터페이스가 빈등록이 안되어 있다고 진행이 안돼서 상당히 난감했다.
+> Fegin Client는 기본적으로 설정되는 Bean이 있기 때문의 별도의 Configuration을 설정하지 않아도 사용하는데 문제가 없다고한다.(@EnableFeignClients를 추가했을 경우)
+> 
+> 기본적으로 제공되는 Bean은 Encoder, Decoder, Logger, Contract, Retryer등이 있으며, 재용청을 하는 Retryer같은 경우 default옵션이 Retryer.NEVER_RETRY로 재요청이 비활성화 되어있다.
+> 
+>> 어쩐지 @EnbleFeignClients가 없을 때 인터페이스가 빈등록이 안되어 있다고 진행이 안돼서 상당히 난감했다.
 
 **예제 코드를 한번 보자!**
 
