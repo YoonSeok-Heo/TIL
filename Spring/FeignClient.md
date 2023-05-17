@@ -47,8 +47,9 @@ implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-o
 해당 어노테이션은 하위 클래스를 탐색하면서 @FeignClient를 찾아 구현체를 생성한다고 한다.
 
 > Fegin Client는 기본적으로 설정되는 Bean이 있기 때문의 별도의 Configuration을 설정하지 않아도 사용하는데 문제가 없다고한다.(@EnableFeignClients를 추가했을 경우)
-> 
-> 기본적으로 제공되는 Bean은 Encoder, Decoder, Logger, Contract, Retryer등이 있으며, 재용청을 하는 Retryer같은 경우 default옵션이 Retryer.NEVER_RETRY로 재요청이 비활성화 되어있다.
+>
+>
+> 기본적으로 제공되는 Bean은 Encoder, Decoder, Logger, Contract, Retryer등이 있으며, 재용청을 하는 Retryer같은 경우 default옵션이 Retryer.NEVER_RETRY로 재요청이 비활성화 되어있다.[<공식문서 경로>](https://docs.spring.io/spring-cloud-openfeign/docs/current/reference/html/#spring-cloud-feign-overriding-defaults)
 > 
 >> 어쩐지 @EnbleFeignClients가 없을 때 인터페이스가 빈등록이 안되어 있다고 진행이 안돼서 상당히 난감했다.
 
@@ -94,7 +95,7 @@ public interface StoreClient {
 
 ### 1.3.1. @FeignClient()
 
-다양한 사용법이 있지만 기본적인 역할을 확인해 보자 "stores"라는 값은 FeignClient의 이름을 뜻한다.
+다양한 사용법이 있지만 기본적인 역할을 확인해 보자 "stores"라는 값은 FeignClient의 이름을 뜻하며, Spring Cloud LoadBalancer 클라이언트를 생성하는데 사용된다.
 
 url속성에는 호출할 api의 url을 설정할 수 있고, configuration속성은 FeignClient의 설정 정보가 셋팅된 클래스를 넣어줄 수 있다.
 
