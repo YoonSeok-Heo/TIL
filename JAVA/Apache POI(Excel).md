@@ -15,8 +15,28 @@
 
 
 ## 의존성 추가
-아래 두개의 차이점을 잘 몰라 우선 다 추가했다. 
-차이는 나중에 알아보겠다.
+
+### 1. poi
+
+- HSSF
+- Excel 97(~2007) 파일 포맷을 사용할 때
+- 옛날 엑셀버전을 읽고 쓸 경우
+
+### 2. poi-ooxml
+
+- XSSF
+- Excel 2007 OOXML(*.xlsx) 파일 포맷을 사용할 때
+- 요즘 주로 사용되는 엑셀을 읽고 쓸 경우
+
+### 3. poi/poi-ooxml 차이
+
+|poi|poi-ooxml|
+|---|---|
+|HSSFWorkbook|XSSFWorkbook|
+|HSSFSheet|XSSFSheet|
+
+### 4. 의존성 추가
+
 ```xml
 <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
 <dependency>
@@ -36,7 +56,7 @@
 
 ## Excel 파일 읽기
 
-테스트 파일의 내용을 아래와 같다.
+테스트 파일의 내용을 아래와 같다.(XSSF를 사용한 예제이다.)
 
 ![image](https://github.com/YoonSeok-Heo/TIL/assets/113662725/5c707da8-97b5-4f83-941c-a9155c6b9cc6)
 
@@ -129,3 +149,76 @@ public class Main {
 ```
 
 ---
+
+## Excel 파일 만들기
+
+```java
+package org.example;
+
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+
+        // 파일을 생성할 경로와 파일이름
+        String filePath = "E:/workspace/excelTest/ExcelWrite.xlsx";
+
+        // 엑셀에 넣을 데이터를 리스트형식으로 만들어 주었다.
+        List<List<String>> inputData = new ArrayList<>();
+        inputData.add(Arrays.asList("이름", "키", "몸무게"));
+        inputData.add(Arrays.asList("백설공주", "162", "50"));
+        inputData.add(Arrays.asList("유재석", "178", "75"));
+        
+        // workbook을 만들어준다.
+        XSSFWorkbook workbook = new XSSFWorkbook();
+
+        // workbook에서 sheet도 만들어준다.
+        XSSFSheet sheet = workbook.createSheet("Test Sheet");
+
+        // rowNum은 몇번째 줄을 만들것인지 명시하기 위해
+        int rowNum = 0;
+        for(List<String> list : inputData) {
+            // rowNum번째 row을 생성한다.
+            XSSFRow row = sheet.createRow(rowNum++);
+
+            // cellNum은 열번호 A, B, C ...
+            int cellNum = 0;
+            for(String s : list){
+                // cellNum번째 cell을 생성한다.
+                XSSFCell cell = row.createCell(cellNum++);
+                // 해당 셀에 데이터를 넣는다.
+                cell.setCellValue(s);
+            }
+        }
+        try{
+            // 저장하는 부분!
+            FileOutputStream out = new FileOutputStream(new File(filePath));
+            workbook.write(out);
+            out.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### 출력 파일 확인
+
+![image](https://github.com/YoonSeok-Heo/TIL/assets/113662725/5b6901db-7e2d-4daa-8b7d-a6f116f20721)
+
+아주 만족한다.~~
+
+
+---
+
+
