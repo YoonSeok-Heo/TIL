@@ -74,6 +74,7 @@ Sharding은 Collection단위로 하게되는데 다음 이미지는 Collection�
 ![image](https://github.com/YoonSeok-Heo/TIL/assets/113662725/133293e5-862c-41d4-8cc0-ca1c99dda418)
 
 Collection 1: Sharding이 된 상태로 데이터가 나누어진 상태이다.
+
 Collection 2: Sharding이 되지 않고 하나의 Shard에만 들어있다.
 
 ### 왜?? Collection 2는 Shading을 하지 않았을까?
@@ -86,7 +87,17 @@ merge하는데 시간이 소요**되기 때문이다.
 
 > 예로 메타 데이터가 있다.데이터의 크기는 작고 조회수는 잦은 데이터의 경우 한개의 Shard에서 관리하고 한 개의 Shard만 조회한다면 각 Shard에 데이터를 조회하고 merge하는 시간이 소요되지 않기 때문이다.
 
+--- 
 
+## Chunks
+
+![image](https://github.com/YoonSeok-Heo/TIL/assets/113662725/133293e5-862c-41d4-8cc0-ca1c99dda418)
+
+MongoDB는 sharding된 데이터를 분할하고 그것을 청크라고 한다. 각 분할된 조각은 여러 개의 Shard에 분산되어 저장되는데 이 분산 조각을 Chunks라고 한다.
+
+Chunks는 각 Shard서버에 균등하게 저장되어야 좋은 성능을 낼 수 있는데, 균등하게 저장하기 위에서는 Chunks를 Split하고 Migration 하는 과정을 거치게 된다.
+
+> 위 이미지에서 사각형 한 개를 청크라고 할 수 있다. 
 
 
 
