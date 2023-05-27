@@ -100,10 +100,13 @@ Chunks는 각 Shard서버에 균등하게 저장되어야 좋은 성능을 낼 �
 > 위 이미지에서 사각형 한 개를 청크라고 할 수 있다. 
 
 
+---
 
+# Summary
 
-
-
-
+- Sharded Cluster는 MongoDB의 분산 Solution이다.
+- Collection단위로 Sharding이 가능하다.
+- Sharding은 Shard Key를 선정해야하고 해당 필드에는 Index가 만들어져 있어야한다.
+- 꼭 Router를 통해 접근해야 한다.
 
 
