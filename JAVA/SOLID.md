@@ -47,7 +47,7 @@ SOLID원칙들은 소프트웨어 작업에서 프로그래머가 코드를 읽�
     </td>
   </tr>
   <tr>
-    <th>
+    <th>L
     </th>
     <td><a
       href="https://ko.wikipedia.org/wiki/%EB%A6%AC%EC%8A%A4%EC%BD%94%ED%94%84_%EC%B9%98%ED%99%98_%EC%9B%90%EC%B9%99"
