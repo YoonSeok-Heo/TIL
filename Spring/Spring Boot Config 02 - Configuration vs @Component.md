@@ -9,7 +9,7 @@ categories:
 ---
 
 ## Intro
-Component vs Comfiguration ~
+Component vs Configuration ~
 
 
 
