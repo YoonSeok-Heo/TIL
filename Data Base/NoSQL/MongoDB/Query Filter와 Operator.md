@@ -8,7 +8,7 @@ MongoDB CRUD작업에서 Query Filter와 Operator가 필수이다.!
 
 ![image](https://github.com/YoonSeok-Heo/TIL/assets/113662725/3eae3052-5bb5-46f2-89d7-8f56810192bf)
 
-```mongodb-json
+```javascript
 # sample
 db.users.insertOnd(
   {
@@ -34,7 +34,7 @@ db.users.insertOnd(
 
 ![image](https://github.com/YoonSeok-Heo/TIL/assets/113662725/985466d8-2700-49f5-9f2f-7187b9c184a1)
 
-```mongodb-json
+```javascript
 db.users.find(
     { age: { $gt: 18 } },
     { name: 1, address: 1 }
@@ -51,7 +51,7 @@ age가 18보다 큰($gt: greater than)데이터의 name필드와 address필드�
 
 ![image](https://github.com/YoonSeok-Heo/TIL/assets/113662725/b7870c0a-3d38-4577-aa54-75d0691ff6a2)
 
-```mongodb-json
+```javascript
 db.users.updateMany(
     { age: { $lt: 18 } },
     { $set: { status: "reject" } }
@@ -66,7 +66,7 @@ updateMany()를 이용해서 업데이트를 진행하는데 첫번째 인자에
 
 ![image](https://github.com/YoonSeok-Heo/TIL/assets/113662725/caf6ff57-e953-4ab8-820a-1f1e78efa3f7)
 
-```mongodb-json
+```javascript
 db.users.deleteMany(
     { status: "reject" }
 )

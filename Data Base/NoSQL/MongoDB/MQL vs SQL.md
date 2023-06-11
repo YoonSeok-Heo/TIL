@@ -10,7 +10,7 @@ RDB에서도 SQL이라는 질의 형태를 가지고 있고 MongoDB에서도 MQL
 
 RDB에서 database를 생성하는 과정과 같다.
 
-```mongodb-json
+```javascript
 db.createCollection("people")
 ```
 
@@ -20,7 +20,7 @@ db.createCollection("people")
 
 RDB에서는 Table의 형태를 미리 정해주고 Insert작업을 해야하지만 NoSQL인 MongoDB에서는 Insert의 형태 그대로 들어가게 된다.(따로 테이블을 생성할 필요가 없다는 뜻.)
 
-```mongodb-json
+```javascript
 db.people.insertOne( {
     user_id: "abc123",
     age: 55,
@@ -40,7 +40,7 @@ RDB에서 alter와 같다 테이블의 구조 수정!
 
 필드 추가
 
-```mongodb-json
+```javascript
 db.people.updateMany(
     { },
     { $set: { join_date: new Date() } }
@@ -51,7 +51,7 @@ db.people.updateMany(
 
 필드 삭제
 
-```mongodb-json
+```javascript
 db.people.updateMany(
     { },
     { $unset: { "join_date": "" } }
@@ -66,7 +66,7 @@ RDB에서 인덱스 작업니다.
 
 ### Index 추가
 
-```mongodb-json
+```javascript
 db.people.createIndex( { user_id: 1 } )
 ```
 
@@ -74,7 +74,7 @@ db.people.createIndex( { user_id: 1 } )
 
 1과 -1은 내림차순 오름차순 차이이다.
 
-```mongodb-json
+```javascript
 db.people.createIndex( { user_id: 1, age: -1 } )
 ```
 
