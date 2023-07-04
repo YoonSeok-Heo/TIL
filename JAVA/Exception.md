@@ -194,15 +194,152 @@ class GFG1 {
 / by zero
 ```
 
+---
+
+## JVM의 Exception처리 방법
+
+### 기본 예외 처리
+
+메서드 내에서 예외가 발생하면 메서드는 예외 객체라는 객체를 생성하여 런타임 시스템(JVM)에 넘긴다.
+예외 객체에는 예외의 이름과 설명, 예외가 발생한 프로그램의 현재 상태가 포함된다. 
+예외 객체를 생성하고 런타임 시스템에서 이를 처리하는 것을 예외를 던진다라고 표현한다.
+예외가 발생한 메서드에 도달하기 위해 호출된 메서드 목록도 있다.
+이렇게 순서대로 나열된 메소드 목록을 Call Stack이라고 한다.
+
+### Exception은 다음과 같은 절차를 따른다.
+
+1. 런타임 시스템은 호출 스택을 검색하여, 예외가 발생한 코드 블록이 포함된 메서드를 찾는다. 이 코드 블록을 예외 처리기라고 한다.
+2. 런타임 시스템은 Exception이 발생한 메서드부터 검색을 시작하여 메서드가 호출된 역순으로 메서드를 스택을 타고 올라간다.
+3. 적절한 핸들러를 찾으면 Exception을 적절한 핸들러로 전달한다. (적절한 핸들러란 Exception을 처리할 수 있는 객체와 유형이 일치하는 것을 의미함)
+4. 런타임 시스템이 호출 스택의 모든 메서드를 검색해도 적절한 처리기를 찾을 수 없을 경우 런타임 시스템은 예외 객체를 런타임 시스템의 일부인 default Exception handler로 넘긴다.
+5. 위 Handler에서 예외 정보를 출력하고 프로그램을 비정상 종료한다.
+
+아래 이미지는 호출 스택의 흐름이다.
+
+![image](https://github.com/YoonSeok-Heo/TIL/assets/113662725/ac52f0eb-c0f1-4c3d-aacb-4ab2d1821aab
+
+```java
+// Java Program to Demonstrate How Exception Is Thrown
+
+// Class
+// ThrowsExecp
+class GFG {
+
+	// Main driver method
+	public static void main(String args[])
+	{
+		// Taking an empty string
+		String str = null;
+		// Getting length of a string
+		System.out.println(str.length());
+	}
+}
+```
+
+Output:
+
+![image](https://github.com/YoonSeok-Heo/TIL/assets/113662725/cf2a1d28-df34-4723-a683-34beb08e3b6e)
 
 
+---
 
+### 호출 스택 예외처리 방법
 
+```java
+// Java Program to Demonstrate Exception is Thrown
+// How the runTime System Searches Call-Stack
+// to Find Appropriate Exception Handler
 
+// Class
+// ExceptionThrown
+class GFG {
 
+	// Method 1
+	// It throws the Exception(ArithmeticException).
+	// Appropriate Exception handler is not found
+	// within this method.
+	static int divideByZero(int a, int b)
+	{
 
+		// this statement will cause ArithmeticException
+		// (/by zero)
+		int i = a / b;
 
+		return i;
+	}
 
+	// The runTime System searches the appropriate
+	// Exception handler in method also but couldn't have
+	// found. So looking forward on the call stack
+	static int computeDivision(int a, int b)
+	{
+
+		int res = 0;
+
+		// Try block to check for exceptions
+		try {
+
+			res = divideByZero(a, b);
+		}
+
+		// Catch block to handle NumberFormatException
+		// exception Doesn't matches with
+		// ArithmeticException
+		catch (NumberFormatException ex) {
+			// Display message when exception occurs
+			System.out.println(
+				"NumberFormatException is occurred");
+		}
+		return res;
+	}
+
+	// Method 2
+	// Found appropriate Exception handler.
+	// i.e. matching catch block.
+	public static void main(String args[])
+	{
+
+		int a = 1;
+		int b = 0;
+
+		// Try block to check for exceptions
+		try {
+			int i = computeDivision(a, b);
+		}
+
+		// Catch block to handle ArithmeticException
+		// exceptions
+		catch (ArithmeticException ex) {
+
+			// getMessage() will print description
+			// of exception(here / by zero)
+			System.out.println(ex.getMessage());
+		}
+	}
+}
+```
+
+### Output
+```
+/ by zero
+```
+
+---
+
+## 프로그래머의 예외처리 방법
+
+### 사용자 정의 예외처리:
+
+Java의 예외처리는 try, catch, throw, throws 와 finally로 관리된다.
+예외를 발생시킬 수 있다고 생각되는 프로그램은 try블록 내에 포함하면 되고, 
+try블록 내에서 예외가 발생하면 예외가 던져진다. 
+예외는 catch블록에서 포착하여 알맞은 방식으로 처리하게 된다.
+또한 예외를 수동으로 던지려면 throw키워드를 사용한다.
+finally블록은 Exception이 발생하고 알맞은 처리까지 진행 후 마지막으로 진행할 과정을 명시한다.
+
+> finally는 JDK 18에서 사라지는것으로 알고 있다.
+
+try-catch문을 살펴보자.
 
 
 
