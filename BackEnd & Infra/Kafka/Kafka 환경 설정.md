@@ -48,3 +48,18 @@ JAVA는 환경설정까지 모두 되어있다는 가정하에 Kafka를 설치�
 근데 나는 뭔가 잘못된거같다.. 우선 강의와 다르게 jdk17을 사용햇는데 주키퍼 올리는 과정중에 문제가 있는것 같다.
 
 다시한번 확인해봐야겠다.
+
+
+---
+
+## 실행
+
+이것저것 해보다 된거같은데 뭘하다가 된건지 정확히 모르겠다... 젠장,,
+
+![image](https://github.com/YoonSeok-Heo/TIL/assets/113662725/29cdd24b-ce7e-4542-afe4-395f6ea89064)
+
+- zookeeper
+
+![image](https://github.com/YoonSeok-Heo/TIL/assets/113662725/ee36b865-5244-467e-be0e-d66f4a3ee70a)
+
+- kafka
